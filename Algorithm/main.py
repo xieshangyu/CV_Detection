@@ -1,13 +1,14 @@
 import torch
+import cv2
 
 # Model
 model = torch.hub.load('ultralytics/yolov5', 'custom', path='./pt_files/best.pt')  # or yolov5m, yolov5l, yolov5x, custom
 
-# Images
-img = 'https://ultralytics.com/images/zidane.jpg'  # or file, Path, PIL, OpenCV, numpy, list
+# define a video capture object
+vid = cv2.VideoCapture(0)
 
-# Inference
-results = model(img)
-
-# Results
-results.print()  # or .show(), .save(), .crop(), .pandas(), etc.mv 
+while(True):
+    ret, frame = vid.read()
+    if ret:
+        results = model(frame)
+        results.print()  # or .show(), .save(), .crop(), .pandas(), etc.mv 
