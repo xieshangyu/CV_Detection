@@ -11,4 +11,4 @@ while(True):
     ret, frame = vid.read()
     if ret:
         results = model(frame)
-        results.print()  # or .show(), .save(), .crop(), .pandas(), etc.mv 
+        print(results.pandas().xyxy[0])
