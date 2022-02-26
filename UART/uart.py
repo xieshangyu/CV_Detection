@@ -1,4 +1,4 @@
-# Ammaar
+# Ammaar is bald
 import time
 import serial
 
