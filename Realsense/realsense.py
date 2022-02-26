@@ -1,6 +1,3 @@
-import cv2
-import pyrealsense2
-from Realsense.realsense_depth import *
 import statistics
 
 # Processes frame and returns median depth
