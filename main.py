@@ -1,5 +1,5 @@
 from Realsense.realsense_depth import *
-import Realsense.realsense
+from Realsense.realsense import *
 from Algorithm.main import *
 import cv2
 
@@ -19,3 +19,5 @@ while True:
         coordinates = get_coordinates(color_frame, model)
         if coordinates != None:
             print(coordinates)
+            depth = process_frame(depth_frame, int(coordinates[0]), int(coordinates[1]), int(coordinates[2]), int(coordinates[3]))
+            print(depth)
