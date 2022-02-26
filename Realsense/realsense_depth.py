@@ -28,8 +28,10 @@ class DepthCamera:
 
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
+
         if not depth_frame or not color_frame:
             return False, None, None
+        
         return True, depth_image, color_image
 
     def release(self):
