@@ -19,5 +19,5 @@ while True:
         coordinates = get_coordinates(color_frame, model)
         if coordinates != None:
             print(coordinates)
-            depth = process_frame(depth_frame, int(coordinates[0]), int(coordinates[1]), int(coordinates[2]), int(coordinates[3]))
+            depth = process_frame(depth_frame, coordinates[0], coordinates[1], coordinates[2], coordinates[3])
             print(depth)

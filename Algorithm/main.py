@@ -10,6 +10,6 @@ def get_coordinates(frame, model):
     results = model(frame)                  # using the model each frame
     rows = results.pandas().xyxy[0]  
     if len(rows) != 0:
-        x_min, y_min, x_max,y_max = rows['xmin'][0], rows['ymin'][0], rows['xmax'][0], rows['ymax'][0]  
+        x_min, y_min, x_max,y_max = int(rows['xmin'][0]), int(rows['ymin'][0]), int(rows['xmax'][0]), int(rows['ymax'][0]) 
         return (x_min, y_min, x_max, y_max)
     return None
