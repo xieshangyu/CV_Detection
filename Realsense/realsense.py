@@ -3,7 +3,9 @@ import cv2
 from Realsense.realsense_depth import *
 
 # Processes frame and returns median depth
-def process_frame(depth_frame, x_min, y_min, x_max, y_max):     
+
+
+def process_frame(depth_frame, x_min, y_min, x_max, y_max):
     values = []
     for x in range(x_min - 1, x_max):
         for y in range(y_min - 1, y_max):
@@ -14,7 +16,7 @@ def process_frame(depth_frame, x_min, y_min, x_max, y_max):
 
 #point = (400, 300)
 
-#def show_distance(event, x, y, args, params):
+# def show_distance(event, x, y, args, params):
 #    global point
 #    point = (x, y)
 
@@ -25,21 +27,20 @@ def process_frame(depth_frame, x_min, y_min, x_max, y_max):
 #cv2.namedWindow("Color frame")
 
 
-
-#Display BBOX around detection with Estimated median depth.
+# Display BBOX around detection with Estimated median depth.
 def show_frame(color_frame, depth, coordinates):
-    #Display Text for distance
-    cv2.putText(color_frame, "{}mm".format(distance) + "Median: {}mm".format(med), (coordinates[0], coordinates[1] - 20), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0))
+    # Display Text for distance
+    #cv2.putText(color_frame, "Median: {}mm".format(depth), (coordinates[0], coordinates[1] - 20), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0))
 
-    #Display Rectangle overlay
-    cv2.rectangle(color_frame, (minX, minY), (maxX, maxY), (0, 0, 255), 10)
+    # Display Rectangle overlay
+    #cv2.rectangle(color_frame, (minX, minY), (maxX, maxY), (0, 0, 255), 10)
     # Show Both
+    cv2.imshow("Video", color_frame)
 
     #
 
 
-
-#while True:
+# while True:
 #    ret, depth_frame, color_frame = dc.get_frame()
 #
 #    # Show distance for a specific point
@@ -52,7 +53,7 @@ def show_frame(color_frame, depth, coordinates):
 #    maxY = point[1]+bounds
 #    minX = point[0]-bounds
 #    maxX = point[0]+bounds
-#    
+#
 #    values = []
 #    for x in range(minX, maxX+1):
 #        for y in range(minY, minY+1):
@@ -60,7 +61,7 @@ def show_frame(color_frame, depth, coordinates):
 #            #print(depth_frame[point[1], point[0]])
 #    print(values)
 #    med = statistics.median(values)
-#    
+#
 #    cv2.putText(color_frame, "{}mm".format(distance) + "Median: {}mm".format(med), (point[0], point[1] - 20), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0))
 #    cv2.rectangle(color_frame, (minX, minY), (maxX, maxY), (0, 0, 255), 10)
 #
