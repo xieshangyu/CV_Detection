@@ -28,14 +28,20 @@ def process_frame(depth_frame, x_min, y_min, x_max, y_max):
 
 
 # Display BBOX around detection with Estimated median depth.
-def show_frame(color_frame, depth, coordinates):
+def show_frame(color_frame, depth_frame, depth, coordinates):
     # Display Text for distance
-    #cv2.putText(color_frame, "Median: {}mm".format(depth), (coordinates[0], coordinates[1] - 20), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0))
+    if coordinates != None:
+        cv2.putText(color_frame, "Median: {}mm".format(
+            depth), (coordinates[0], coordinates[1] - 20), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0))
 
-    # Display Rectangle overlay
-    #cv2.rectangle(color_frame, (minX, minY), (maxX, maxY), (0, 0, 255), 10)
+        # Display Rectangle overlay
+        cv2.rectangle(color_frame, (coordinates[0], coordinates[1]),
+                      (coordinates[2], coordinates[3]), (0, 0, 255), 10)
+        cv2.rectangle(depth_frame, (coordinates[0], coordinates[1]),
+                      (coordinates[2], coordinates[3]), (0, 0, 255), 10)
     # Show Both
     cv2.imshow("Video", color_frame)
+    cv2.imshow("Video_Depth", depth_frame)
 
     #
 
