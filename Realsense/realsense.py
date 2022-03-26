@@ -4,6 +4,8 @@ from Realsense.realsense_depth import *
 
 # Processes frame and returns median depth
 
+# Get Median Depth from given Depth Frame and BBOX coordinates
+
 
 def process_frame(depth_frame, x_min, y_min, x_max, y_max):
     values = []
@@ -13,18 +15,6 @@ def process_frame(depth_frame, x_min, y_min, x_max, y_max):
 
     med = statistics.median(values)
     return med
-
-#point = (400, 300)
-
-# def show_distance(event, x, y, args, params):
-#    global point
-#    point = (x, y)
-
-# Initialize Camera Intel Realsense
-#dc = DepthCamera()
-
-# Create mouse event
-#cv2.namedWindow("Color frame")
 
 
 # Display BBOX around detection with Estimated median depth.
@@ -43,7 +33,18 @@ def show_frame(color_frame, depth_frame, depth, coordinates):
     cv2.imshow("Video", color_frame)
     cv2.imshow("Video_Depth", depth_frame)
 
-    #
+
+#point = (400, 300)
+
+# def show_distance(event, x, y, args, params):
+#    global point
+#    point = (x, y)
+
+# Initialize Camera Intel Realsense
+#dc = DepthCamera()
+
+# Create mouse event
+#cv2.namedWindow("Color frame")
 
 
 # while True:
