@@ -1,4 +1,4 @@
-#from signal import pause
+import os
 from turtle import color
 from matplotlib.pyplot import show
 from Realsense.realsense_depth import *
@@ -6,35 +6,57 @@ from Realsense.realsense import *
 from Algorithm.main import *
 import cv2
 import time
+import argparse
+# Disable tensorflow output
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
-# Initialize Camera Intel Realsense
-dc = DepthCamera()
+def main(_argv):
+    parser = argparse.ArgumentParser()
+    # Initialize Camera Intel Realsense
+    dc = DepthCamera()
 
-# Create window for video
-cv2.namedWindow("Video")
-cv2.namedWindow("Video_Depth")
+    Debug_flag = 0
 
-# Get CV model
-model = get_model()
-oldCords = None
-depth = None
+    # Parse arguments
+    if _argv.Debug == "1" or _argv.D == "1":
+        Debug_flag = 1
+        # Create window for video
+        cv2.namedWindow("Video")
+        cv2.namedWindow("Video_Depth")
 
-while True:
-    ret, depth_frame, color_frame = dc.get_frame()
-    # print(ret)
-    if ret:
+    elif _argv.Debug == "0" or _argv.D == "0":
+        Debug_flag = 0
 
-        key = cv2.waitKey(1)
-        if key == 27:
-            break
-        coordinates = get_coordinates(color_frame, model)
+    # Load saved CV model
+    model = get_model()
 
-        if coordinates != None:
-            # time.sleep(5)
-            print(coordinates)
-            depth = process_frame(
-                depth_frame, coordinates[0], coordinates[1], coordinates[2], coordinates[3])
-            print(coordinates)
-            print(depth)
-        show_frame(color_frame, depth_frame, depth, coordinates)
+    # Initialize Algorithm
+    oldCords = None
+    depth = None
+
+    while True:
+        # Start Video Capture
+        ret, depth_frame, color_frame = dc.get_frame()
+
+        # If frame is not empty
+        if ret:
+
+            key = cv2.waitKey(1)
+            if key == 27:
+                break
+
+            # Get coordinates from color frame
+            coordinates = get_coordinates(color_frame, model)
+
+            if coordinates != None:
+                # Get Median Depth from depth frame
+                depth = process_frame(
+                    depth_frame, coordinates[0], coordinates[1], coordinates[2], coordinates[3])
+
+                # Debug mode
+                if Debug_flag == 1:
+                    print(coordinates)
+                    print(coordinates)
+                    print(depth)
+                    show_frame(color_frame, depth_frame, depth, coordinates)
