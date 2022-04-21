@@ -34,36 +34,23 @@ def hello_world():
         </div>
     </body>
     """
-output = None
 
-
+img = None
 # setup camera and resolution
-
 cam = cv2.VideoCapture(0)
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-
-output = None
-
-def get_frame():
-    # cam = cv2.VideoCapture(0)
-    # cam.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-    # cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-    _, img = cam.read()
-    _, frame = cv2.imencode('.jpg', img)
-    global output
-    output = frame
-
 
 
 def gather_img():
     while True:
         time.sleep(0.1)
-        # _, img = cam.read()
-        # _, frame = cv2.imencode('.jpg', img)
-        get_frame()
-        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + output.tobytes() + b'\r\n')
+        _, frame = cv2.imencode('.jpg', img)
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame.tobytes() + b'\r\n')
 
+@app.route('/get_image')
+def get_image(data):
+    image = data
 
 @app.route("/mjpeg")
 def mjpeg():

@@ -35,6 +35,8 @@ def show_frame(color_frame, depth_frame, depth, coordinates):
     cv2.imshow("Video", color_frame)
     cv2.imshow("Video_Depth", depth_frame)
 
+    
+
 
 #point = (400, 300)
 
