@@ -1,15 +1,16 @@
 import os
 from turtle import color
-from matplotlib.pyplot import show
+import matplotlib
 from Realsense.realsense_depth import *
 from Realsense.realsense import *
 from Algorithm.main import *
 import cv2
 import time
 import argparse
+
+matplotlib.use('TKAgg')
 # Disable tensorflow output
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
 
 def main(_argv):
     parser = argparse.ArgumentParser()
@@ -60,3 +61,7 @@ def main(_argv):
                     print(coordinates)
                     print(depth)
                     show_frame(color_frame, depth_frame, depth, coordinates)
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv[1:])

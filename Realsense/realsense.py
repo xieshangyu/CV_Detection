@@ -29,6 +29,8 @@ def show_frame(color_frame, depth_frame, depth, coordinates):
                       (coordinates[2], coordinates[3]), (0, 0, 255), 10)
         cv2.rectangle(depth_frame, (coordinates[0], coordinates[1]),
                       (coordinates[2], coordinates[3]), (0, 0, 255), 10)
+
+
     # Show Both
     cv2.imshow("Video", color_frame)
     cv2.imshow("Video_Depth", depth_frame)
