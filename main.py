@@ -60,3 +60,7 @@ def main(_argv):
                     print(coordinates)
                     print(depth)
                     show_frame(color_frame, depth_frame, depth, coordinates)
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv[1:])
